@@ -8,7 +8,7 @@ test('renders the app', () => {
 
   require('..')
 
-  screen.getByTitle('Bookshelf')
+  screen.queryByTitle(/bookshelf/i)
   screen.getByRole('heading', {name: /Bookshelf/i})
   screen.getByRole('button', {name: /Login/i})
   screen.getByRole('button', {name: /Register/i})
