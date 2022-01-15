@@ -1,5 +1,7 @@
 // 🐨 make sure to add the comment and import jsx from @emotion/core
 // up here so you can use the css prop
+/** @jsx jsx */
+import {jsx} from '@emotion/core'
 
 // 🐨 let's get a solid reset of global styles so everything looks a bit better
 // In this project we're using bootstrap-reboot which you can import from
@@ -39,7 +41,18 @@ function LoginForm({onSubmit, submitButton}) {
   //      maxWidth: '300px',
   //    },
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        '> div': {
+          margin: '10px auto',
+          width: '100%',
+          maxWidth: '300px',
+        },
+      }}
+    >
       {/* 🐨 these div elements could be a FormGroup you create in components/lib */}
       {/* 🐨 and the inputs elements could be custom styled Input components too */}
       <FormGroup>
@@ -73,7 +86,16 @@ function App() {
   //    width: '100%',
   //    height: '100vh',
   return (
-    <div>
+    <div
+      css={{  
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100vh',
+      }}
+    >
       <Logo width="80" height="80" />
       <h1>Bookshelf</h1>
       {/*
@@ -84,7 +106,13 @@ function App() {
             gridGap: '0.75rem',
       */}
       {/* 🐨 And make sure to use the new Button component for all these buttons */}
-      <div>
+      <div
+        css={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+          gridGap: '0.75rem',
+        }}
+      >
         <Modal>
           <ModalOpenButton>
             <Button variant="primary">Login</Button>
