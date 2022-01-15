@@ -4,10 +4,46 @@ import {Logo} from './components/logo'
 import {Dialog} from '@reach/dialog'
 import '@reach/dialog/styles.css'
 
+function LoginForm({buttonText, onSubmit}) {
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const {username, password} = e.target.elements;
+
+    onSubmit({
+      username: username.value,
+      password: password.value
+    })
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor='username'>username</label>
+        <input id="username" />
+      </div>
+      <div>
+        <label htmlFor='password'>password</label>
+        <input type="password" id="password" />
+      </div>
+      <div>
+        <button type="submit">{buttonText}</button>
+      </div>
+    </form>
+  )
+}
+
 function App() {
   const [openDialog, setOpenDialog] = React.useState('none');
 
   const closeDialog = () => setOpenDialog('none');
+
+  function handleLogin(formData) {
+    console.log('login', formData);
+  }
+
+  function handleRegister(formData) {
+    console.log('register', formData);
+  }
 
   return (
     <div>
@@ -24,12 +60,14 @@ function App() {
           <button onClick={closeDialog}>close</button>
         </div>
         <h3>Login</h3>
+        <LoginForm buttonText="Login" onSubmit={handleLogin} />
       </Dialog>
       <Dialog aria-label="Registration form" isOpen={openDialog === 'register'}>
         <div>
           <button onClick={closeDialog}>close</button>
         </div>
         <h3>Register</h3>
+        <LoginForm buttonText="Register" onSubmit={handleRegister} />
       </Dialog>
     </div>
   )
