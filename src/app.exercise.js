@@ -10,6 +10,16 @@ import { client } from 'utils/api-client.exercise'
 function App() {
   const [user, setUser] = React.useState();
 
+  React.useEffect(() => {
+    async function getUser() {
+      const token = await auth.getToken();
+      if(token) {
+        client('me', {token}).then(data => setUser(data.user));
+      }
+    }
+    getUser();
+  }, []);
+
   const login = form => auth.login(form).then(u => setUser(u));
   const register = form => auth.register(form).then(u => setUser(u));
 
